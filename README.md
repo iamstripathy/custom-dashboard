@@ -1,67 +1,67 @@
-# Welcome to your Lovable project
 
-## Project info
+# ProcureFlow Dashboard
 
-## How can I edit this code?
+A modern procurement management dashboard built with HTML, CSS, and JavaScript for the frontend and Python Flask for the backend.
 
-There are several ways of editing your application.
+## Frontend Features
 
-**Use Lovable**
+- Responsive dashboard with modern UI
+- Interactive charts and statistics
+- Tabbed interface for different data views
+- Dark/light mode support
+- Mobile-friendly design
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f8654444-d9f6-4c28-b7db-c8cf184c5c4f) and start prompting.
+## Backend Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- RESTful API for procurement data
+- Endpoints for requests, negotiations, purchase orders, and suppliers
+- Simple authentication system
+- Mock data for demonstration
 
-**Use your preferred IDE**
+## Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Python 3.7+
+- Web browser
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Installation
 
-Follow these steps:
+1. Clone this repository
+2. Install Python dependencies:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+pip install -r requirements.txt
 ```
 
-**Edit a file directly in GitHub**
+## Running the Application
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Start the Flask backend:
 
-**Use GitHub Codespaces**
+```bash
+python app.py
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+2. Open your web browser and navigate to `http://localhost:5000`
 
-## What technologies are used for this project?
+## API Endpoints
 
-This project is built with .
+- `/api/dashboard/summary` - Get dashboard summary statistics
+- `/api/dashboard/procurement` - Get procurement activity data
+- `/api/dashboard/vendors` - Get top vendors data
+- `/api/dashboard/requests` - Get recent requests data
+- `/api/requests` - Get, create, update, and delete procurement requests
+- `/api/negotiations` - Get negotiation data
+- `/api/purchase-orders` - Get purchase order data
+- `/api/suppliers` - Get supplier data
+- `/api/auth/login` - User authentication
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Further Development
 
-## How can I deploy this project?
+For a production environment, consider:
 
-Simply open [Lovable](https://lovable.dev/projects/f8654444-d9f6-4c28-b7db-c8cf184c5c4f) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+1. Implementing a proper database (PostgreSQL, MongoDB)
+2. Adding JWT authentication for secure API access
+3. Implementing WebSockets for real-time features
+4. Creating proper user management and role-based access control
+5. Connecting to payment processing APIs (Stripe, PayPal)
+6. Adding file upload capabilities for documents
+7. Implementing notifications via email and in-app messaging
