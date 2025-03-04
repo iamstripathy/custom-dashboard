@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProcureFlow - Request Details</title>
+    <title>ProcureFlow - Request Detail</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -80,242 +80,76 @@
             <div class="page-content">
                 <div class="page-header">
                     <div>
-                        <h1 id="request-title">Loading...</h1>
-                        <p id="request-id">Request ID: Loading...</p>
+                        <h1>Request Details</h1>
+                        <p>View and manage purchase request information</p>
                     </div>
-                    <div class="action-buttons">
-                        <a href="/requests" class="button outline">
-                            <i class="fas fa-arrow-left"></i>
-                            Back to List
-                        </a>
-                        <button class="button danger" id="reject-btn">
-                            <i class="fas fa-times-circle"></i>
-                            Reject
+                    <div>
+                        <button class="button" id="edit-request">
+                            <i class="fas fa-edit"></i>
+                            Edit
                         </button>
-                        <button class="button primary" id="approve-btn">
-                            <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+
+                <div class="request-detail-container">
+                    <!-- Request Info Card -->
+                    <div class="card request-info-card">
+                        <div class="card-header">
+                            <h3>Request Information</h3>
+                            <div id="request-status"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="request-detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Request ID</div>
+                                    <div class="detail-value" id="request-id"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Title</div>
+                                    <div class="detail-value" id="request-title"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Requester</div>
+                                    <div class="detail-value" id="request-requester"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Department</div>
+                                    <div class="detail-value" id="request-department"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Date Created</div>
+                                    <div class="detail-value" id="request-date"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Amount</div>
+                                    <div class="detail-value" id="request-amount"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="button primary" id="approve-button">
+                            <i class="fas fa-check"></i>
                             Approve
                         </button>
-                    </div>
-                </div>
-
-                <!-- Status Banner -->
-                <div class="alert-banner">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <h4>This request requires your action</h4>
-                        <p>Please review and approve or reject this purchase request.</p>
-                    </div>
-                </div>
-
-                <div class="detail-layout">
-                    <!-- Main Content Column -->
-                    <div class="detail-main">
-                        <!-- Request Information -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Request Information</h3>
-                                <p>Details about this purchase request</p>
-                            </div>
-                            <div class="card-content">
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <div class="info-label">
-                                            <i class="fas fa-user"></i>
-                                            Requester
-                                        </div>
-                                        <div class="info-value" id="requester">Loading...</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">
-                                            <i class="fas fa-building"></i>
-                                            Department
-                                        </div>
-                                        <div class="info-value" id="department">Loading...</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">
-                                            <i class="fas fa-calendar"></i>
-                                            Submission Date
-                                        </div>
-                                        <div class="info-value" id="submit-date">Loading...</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">
-                                            <i class="fas fa-calendar"></i>
-                                            Required By
-                                        </div>
-                                        <div class="info-value" id="due-date">Loading...</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">
-                                            <i class="fas fa-file-alt"></i>
-                                            Request Type
-                                        </div>
-                                        <div class="info-value" id="request-type">Loading...</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">Status</div>
-                                        <div class="info-value">
-                                            <span class="status-badge" id="status-badge">Loading...</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="justification-section">
-                                    <h4>Business Justification</h4>
-                                    <div class="justification-text" id="justification">
-                                        Loading...
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Items & Pricing -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Items & Pricing</h3>
-                                <p>Items requested for procurement</p>
-                            </div>
-                            <div class="card-content">
-                                <div class="table-container">
-                                    <table id="items-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Description</th>
-                                                <th class="text-right">Quantity</th>
-                                                <th class="text-right">Unit Price</th>
-                                                <th class="text-right">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Table content will be populated by JavaScript -->
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="3" class="text-right font-medium">Total Amount</td>
-                                                <td class="text-right font-medium" id="total-amount">$0.00</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Attachments -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Attachments</h3>
-                                <p>Supporting documents for this request</p>
-                            </div>
-                            <div class="card-content">
-                                <ul class="attachments-list" id="attachments-list">
-                                    <!-- Attachments will be populated by JavaScript -->
-                                </ul>
-                                <div class="empty-state" id="no-attachments" style="display: none;">
-                                    <p>No attachments for this request</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Sidebar Column -->
-                    <div class="detail-sidebar">
-                        <!-- Approval Status -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Approval Status</h3>
-                                <p>Current approval workflow status</p>
-                            </div>
-                            <div class="card-content">
-                                <ul class="approvers-list" id="approvers-list">
-                                    <!-- Approvers will be populated by JavaScript -->
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- Add Comment -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Add Comment</h3>
-                                <p>Leave a note or ask for clarification</p>
-                            </div>
-                            <div class="card-content">
-                                <textarea placeholder="Type your comment here..." id="comment-text"></textarea>
-                                <button class="button outline full-width" id="add-comment-btn">
-                                    <i class="fas fa-comment"></i>
-                                    Add Comment
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Activity Timeline -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Activity Timeline</h3>
-                                <p>Recent activity on this request</p>
-                            </div>
-                            <div class="card-content">
-                                <div class="timeline" id="timeline">
-                                    <!-- Timeline items will be populated by JavaScript -->
-                                </div>
-                                <button class="button ghost full-width small" id="view-history-btn">
-                                    View Full History
-                                </button>
-                            </div>
-                        </div>
+                        <button class="button danger" id="reject-button">
+                            <i class="fas fa-times"></i>
+                            Reject
+                        </button>
+                        <button class="button" id="negotiate-button">
+                            <i class="fas fa-comments"></i>
+                            Negotiate
+                        </button>
+                        <button class="button" id="create-po-button">
+                            <i class="fas fa-file-alt"></i>
+                            Create PO
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Modals -->
-    <div class="modal" id="reject-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Reject this request?</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>This will return the request to the requester. Please provide a reason for rejection.</p>
-                <textarea placeholder="Reason for rejection..." id="rejection-reason"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button class="button outline" id="cancel-reject">Cancel</button>
-                <button class="button danger" id="confirm-reject">Reject Request</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="approve-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Approve this request?</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>This will move the request to the next approval stage.</p>
-                <textarea placeholder="Optional comments..." id="approval-comments"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button class="button outline" id="cancel-approve">Cancel</button>
-                <button class="button primary" id="confirm-approve">Approve Request</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toast">
-        <div class="toast-content">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-message">
-                <h4 id="toast-title">Success</h4>
-                <p id="toast-description">Action completed successfully</p>
-            </div>
-        </div>
-        <button class="toast-close">&times;</button>
     </div>
 
     <script src="/static/js/request-detail.js"></script>
