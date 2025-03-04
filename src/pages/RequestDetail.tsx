@@ -14,7 +14,7 @@ import {
   FileText, 
   MessageSquare, 
   CheckCircle, 
-  XCircle, this 
+  XCircle 
 } from "lucide-react";
 import {
   Card,
