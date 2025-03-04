@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProcureFlow - Request Details</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <div class="logo-text">ProcureFlow</div>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <ul class="sidebar-menu">
+                    <li><a href="/"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+                    <li class="active"><a href="/requests"><i class="fas fa-shopping-cart"></i><span>Purchase Requests</span></a></li>
+                    <li><a href="/negotiations"><i class="fas fa-comments"></i><span>Negotiations</span></a></li>
+                    <li><a href="/orders"><i class="fas fa-file-alt"></i><span>Purchase Orders</span></a></li>
+                    <li><a href="/suppliers"><i class="fas fa-users"></i><span>Suppliers</span></a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i><span>Order Tracking</span></a></li>
+                    <li><a href="#"><i class="fas fa-box"></i><span>Inventory</span></a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Procurement Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <div class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="nav-actions">
+                    <button class="icon-button" title="Create New Request">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="icon-button" title="Messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="icon-button" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="icon-button theme-toggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="avatar-button">
+                        <div class="avatar">JD</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 id="request-title">Loading...</h1>
+                        <p id="request-id">Request ID: Loading...</p>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="/requests" class="button outline">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to List
+                        </a>
+                        <button class="button danger" id="reject-btn">
+                            <i class="fas fa-times-circle"></i>
+                            Reject
+                        </button>
+                        <button class="button primary" id="approve-btn">
+                            <i class="fas fa-check-circle"></i>
+                            Approve
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status Banner -->
+                <div class="alert-banner">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>This request requires your action</h4>
+                        <p>Please review and approve or reject this purchase request.</p>
+                    </div>
+                </div>
+
+                <div class="detail-layout">
+                    <!-- Main Content Column -->
+                    <div class="detail-main">
+                        <!-- Request Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Request Information</h3>
+                                <p>Details about this purchase request</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <div class="info-label">
+                                            <i class="fas fa-user"></i>
+                                            Requester
+                                        </div>
+                                        <div class="info-value" id="requester">Loading...</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">
+                                            <i class="fas fa-building"></i>
+                                            Department
+                                        </div>
+                                        <div class="info-value" id="department">Loading...</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">
+                                            <i class="fas fa-calendar"></i>
+                                            Submission Date
+                                        </div>
+                                        <div class="info-value" id="submit-date">Loading...</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">
+                                            <i class="fas fa-calendar"></i>
+                                            Required By
+                                        </div>
+                                        <div class="info-value" id="due-date">Loading...</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">
+                                            <i class="fas fa-file-alt"></i>
+                                            Request Type
+                                        </div>
+                                        <div class="info-value" id="request-type">Loading...</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Status</div>
+                                        <div class="info-value">
+                                            <span class="status-badge" id="status-badge">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="justification-section">
+                                    <h4>Business Justification</h4>
+                                    <div class="justification-text" id="justification">
+                                        Loading...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Items & Pricing -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Items & Pricing</h3>
+                                <p>Items requested for procurement</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="table-container">
+                                    <table id="items-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th class="text-right">Quantity</th>
+                                                <th class="text-right">Unit Price</th>
+                                                <th class="text-right">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Table content will be populated by JavaScript -->
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3" class="text-right font-medium">Total Amount</td>
+                                                <td class="text-right font-medium" id="total-amount">$0.00</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Attachments -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Attachments</h3>
+                                <p>Supporting documents for this request</p>
+                            </div>
+                            <div class="card-content">
+                                <ul class="attachments-list" id="attachments-list">
+                                    <!-- Attachments will be populated by JavaScript -->
+                                </ul>
+                                <div class="empty-state" id="no-attachments" style="display: none;">
+                                    <p>No attachments for this request</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar Column -->
+                    <div class="detail-sidebar">
+                        <!-- Approval Status -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Approval Status</h3>
+                                <p>Current approval workflow status</p>
+                            </div>
+                            <div class="card-content">
+                                <ul class="approvers-list" id="approvers-list">
+                                    <!-- Approvers will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Comment -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Add Comment</h3>
+                                <p>Leave a note or ask for clarification</p>
+                            </div>
+                            <div class="card-content">
+                                <textarea placeholder="Type your comment here..." id="comment-text"></textarea>
+                                <button class="button outline full-width" id="add-comment-btn">
+                                    <i class="fas fa-comment"></i>
+                                    Add Comment
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Timeline -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Activity Timeline</h3>
+                                <p>Recent activity on this request</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="timeline" id="timeline">
+                                    <!-- Timeline items will be populated by JavaScript -->
+                                </div>
+                                <button class="button ghost full-width small" id="view-history-btn">
+                                    View Full History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="reject-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reject this request?</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This will return the request to the requester. Please provide a reason for rejection.</p>
+                <textarea placeholder="Reason for rejection..." id="rejection-reason"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="button outline" id="cancel-reject">Cancel</button>
+                <button class="button danger" id="confirm-reject">Reject Request</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="approve-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Approve this request?</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This will move the request to the next approval stage.</p>
+                <textarea placeholder="Optional comments..." id="approval-comments"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="button outline" id="cancel-approve">Cancel</button>
+                <button class="button primary" id="confirm-approve">Approve Request</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-message">
+                <h4 id="toast-title">Success</h4>
+                <p id="toast-description">Action completed successfully</p>
+            </div>
+        </div>
+        <button class="toast-close">&times;</button>
+    </div>
+
+    <script src="/static/js/request-detail.js"></script>
+</body>
+</html>

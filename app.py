@@ -1,12 +1,12 @@
 
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 import json
 import os
 from datetime import datetime, timedelta
 import uuid
 
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)  # Enable CORS for all routes
 
 # In-memory data storage (in a real app, you would use a database)
@@ -41,14 +41,38 @@ summary_data = {
     "active_vendors": 38
 }
 
-# Routes to serve the static files
+# Routes to serve HTML pages
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html')
 
-@app.route('/<path:path>')
+@app.route('/requests')
+def request_list():
+    return render_template('requests.html')
+
+@app.route('/requests/new')
+def request_new():
+    return render_template('request_form.html')
+
+@app.route('/requests/<request_id>')
+def request_detail(request_id):
+    return render_template('request_detail.html', request_id=request_id)
+
+@app.route('/negotiations')
+def negotiations():
+    return render_template('negotiations.html')
+
+@app.route('/orders')
+def orders():
+    return render_template('orders.html')
+
+@app.route('/suppliers')
+def suppliers():
+    return render_template('suppliers.html')
+
+@app.route('/static/<path:path>')
 def serve_static(path):
-    return send_from_directory('.', path)
+    return send_from_directory('static', path)
 
 # API routes
 @app.route('/api/dashboard/summary', methods=['GET'])
@@ -245,4 +269,9 @@ def login():
     return jsonify({'error': 'Invalid credentials'}), 401
 
 if __name__ == '__main__':
+    # Ensure directories exist
+    os.makedirs('templates', exist_ok=True)
+    os.makedirs('static/css', exist_ok=True)
+    os.makedirs('static/js', exist_ok=True)
+    
     app.run(debug=True, port=5000)

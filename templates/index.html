@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProcureFlow Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <div class="logo-text">ProcureFlow</div>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <ul class="sidebar-menu">
+                    <li class="active"><a href="/"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+                    <li><a href="/requests"><i class="fas fa-shopping-cart"></i><span>Purchase Requests</span></a></li>
+                    <li><a href="/negotiations"><i class="fas fa-comments"></i><span>Negotiations</span></a></li>
+                    <li><a href="/orders"><i class="fas fa-file-alt"></i><span>Purchase Orders</span></a></li>
+                    <li><a href="/suppliers"><i class="fas fa-users"></i><span>Suppliers</span></a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i><span>Order Tracking</span></a></li>
+                    <li><a href="#"><i class="fas fa-box"></i><span>Inventory</span></a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Procurement Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <div class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="nav-actions">
+                    <button class="icon-button" title="Create New Request">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="icon-button" title="Messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="icon-button" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="icon-button theme-toggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="avatar-button">
+                        <div class="avatar">JD</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Overview of procurement activities and metrics</p>
+                    </div>
+                    <div>
+                        <a href="/requests/new" class="button primary">
+                            <i class="fas fa-file-alt"></i>
+                            New Request
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Total Requests</h3>
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">127</div>
+                            <p class="stat-desc">+18% from last month</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Approval</h3>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">24</div>
+                            <p class="stat-desc">5 awaiting your review</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Total Spent</h3>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">$284,543</div>
+                            <p class="stat-desc">+12% from last quarter</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Active Vendors</h3>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">38</div>
+                            <p class="stat-desc">3 new this month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs Section -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="overview">Overview</button>
+                        <button class="tab-button" data-tab="requests">Requests</button>
+                        <button class="tab-button" data-tab="spend">Spend Analysis</button>
+                    </div>
+
+                    <!-- Overview Tab Content -->
+                    <div class="tab-content active" id="overview-tab">
+                        <div class="grid-layout">
+                            <div class="card full-width">
+                                <div class="card-header">
+                                    <h3>Procurement Activity</h3>
+                                    <p>Monthly procurement requests and approval rates</p>
+                                </div>
+                                <div class="card-content">
+                                    <canvas id="procurement-chart" height="300"></canvas>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Top Vendors</h3>
+                                    <p>Vendors with highest spend this quarter</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="vendor-list" id="top-vendors">
+                                        <!-- Vendor items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div>
+                                        <h3>Recent Requests</h3>
+                                        <p>Latest procurement requests</p>
+                                    </div>
+                                    <a href="/requests" class="link-button">
+                                        View All
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="request-list" id="recent-requests">
+                                        <!-- Request items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Requests Tab Content -->
+                    <div class="tab-content" id="requests-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Detailed Request Analytics</h3>
+                                <p>Analyze procurement requests by department and category</p>
+                            </div>
+                            <div class="card-content">
+                                <p class="placeholder-content">Detailed request analytics would go here</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spend Analysis Tab Content -->
+                    <div class="tab-content" id="spend-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Spend Analysis</h3>
+                                <p>Analysis of procurement spend by category and time period</p>
+                            </div>
+                            <div class="card-content">
+                                <p class="placeholder-content">Spend analysis charts would go here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
