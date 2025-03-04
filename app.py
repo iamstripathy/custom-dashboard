@@ -28,14 +28,10 @@ top_vendors = [
 ]
 
 requests_data = [
-    {"id": "RFQ-2023-1287", "title": "Office Supplies Bulk Order", "requester": "Jane Cooper", "department": "Administration", "date": "2023-06-15", "status": "approved", "amount": "$1,250"},
-    {"id": "RFQ-2023-1286", "title": "IT Hardware Procurement", "requester": "Wade Warren", "department": "IT", "date": "2023-06-14", "status": "pending", "amount": "$12,750"},
-    {"id": "RFQ-2023-1285", "title": "Software Licenses Renewal", "requester": "Esther Howard", "department": "IT", "date": "2023-06-13", "status": "draft", "amount": "$8,500"},
-    {"id": "RFQ-2023-1284", "title": "Marketing Materials", "requester": "Cameron Williamson", "department": "Marketing", "date": "2023-06-12", "status": "rejected", "amount": "$3,200"},
-    {"id": "RFQ-2023-1283", "title": "Office Furniture", "requester": "Brooklyn Simmons", "department": "Facilities", "date": "2023-06-11", "status": "approved", "amount": "$5,800"},
-    {"id": "RFQ-2023-1282", "title": "Training Program Materials", "requester": "Leslie Alexander", "department": "HR", "date": "2023-06-10", "status": "pending", "amount": "$2,300"},
-    {"id": "RFQ-2023-1281", "title": "Sales Conference Equipment", "requester": "Dianne Russell", "department": "Sales", "date": "2023-06-09", "status": "approved", "amount": "$9,200"},
-    {"id": "RFQ-2023-1280", "title": "Research Lab Supplies", "requester": "Robert Fox", "department": "Research", "date": "2023-06-08", "status": "draft", "amount": "$15,600"},
+    {"id": "RFQ-2023-1287", "title": "Office Supplies Bulk Order", "requester": "Jane Cooper", "date": "2023-06-15", "status": "approved", "amount": "$1,250"},
+    {"id": "RFQ-2023-1286", "title": "IT Hardware Procurement", "requester": "Wade Warren", "date": "2023-06-14", "status": "pending", "amount": "$12,750"},
+    {"id": "RFQ-2023-1285", "title": "Software Licenses Renewal", "requester": "Esther Howard", "date": "2023-06-13", "status": "draft", "amount": "$8,500"},
+    {"id": "RFQ-2023-1284", "title": "Marketing Materials", "requester": "Cameron Williamson", "date": "2023-06-12", "status": "rejected", "amount": "$3,200"},
 ]
 
 summary_data = {
@@ -74,7 +70,6 @@ def orders():
 def suppliers():
     return render_template('suppliers.html')
 
-# Routes to serve static files
 @app.route('/static/<path:path>')
 def serve_static(path):
     return send_from_directory('static', path)
@@ -94,7 +89,7 @@ def get_top_vendors():
 
 @app.route('/api/dashboard/requests', methods=['GET'])
 def get_recent_requests():
-    return jsonify(requests_data[:4])  # Return only the 4 most recent requests
+    return jsonify(requests_data)
 
 # API route to get all requests with pagination and filtering
 @app.route('/api/requests', methods=['GET'])
@@ -102,24 +97,10 @@ def get_all_requests():
     page = int(request.args.get('page', 1))
     limit = int(request.args.get('limit', 10))
     status = request.args.get('status')
-    department = request.args.get('department')
-    search = request.args.get('search', '')
     
     filtered_requests = requests_data
-    
-    # Apply filters
-    if status and status != 'all':
-        filtered_requests = [r for r in filtered_requests if r['status'] == status]
-        
-    if department and department != 'all':
-        filtered_requests = [r for r in filtered_requests if r['department'] == department]
-        
-    if search:
-        search = search.lower()
-        filtered_requests = [r for r in filtered_requests if 
-                            search in r['id'].lower() or 
-                            search in r['title'].lower() or 
-                            search in r['requester'].lower()]
+    if status:
+        filtered_requests = [r for r in requests_data if r['status'] == status]
     
     # Simulate pagination
     start_idx = (page - 1) * limit
@@ -150,7 +131,7 @@ def create_request():
     data = request.json
     
     # Validate required fields
-    required_fields = ['title', 'requester', 'amount', 'department']
+    required_fields = ['title', 'requester', 'amount']
     for field in required_fields:
         if field not in data:
             return jsonify({'error': f'Missing required field: {field}'}), 400
@@ -160,7 +141,6 @@ def create_request():
         'id': f"RFQ-{datetime.now().year}-{len(requests_data) + 1288}",
         'title': data['title'],
         'requester': data['requester'],
-        'department': data['department'],
         'date': datetime.now().strftime('%Y-%m-%d'),
         'status': 'draft',
         'amount': data['amount']
@@ -290,8 +270,8 @@ def login():
 
 if __name__ == '__main__':
     # Ensure directories exist
+    os.makedirs('templates', exist_ok=True)
     os.makedirs('static/css', exist_ok=True)
     os.makedirs('static/js', exist_ok=True)
-    os.makedirs('templates', exist_ok=True)
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, port=5000)
